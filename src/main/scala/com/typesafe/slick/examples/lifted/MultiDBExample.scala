@@ -27,7 +27,7 @@ class DAO(val driver: JdbcProfile) {
   def get(k: String)(implicit session: Session): Option[String] =
     (for(p <- props if p.key === k) yield p.value).firstOption
 
-  def getFirst[M, U](q: Query[M, U])(implicit s: Session) = q.first
+  def getFirst[M, U](q: Query[M, U, Seq])(implicit s: Session) = q.first
 }
 
 /**
@@ -37,8 +37,8 @@ class DAO(val driver: JdbcProfile) {
 class DAOHelper(val d: DAO) {
   import d.driver.simple._
 
-  def restrictKey(s: String, q: Query[d.Props, (String, String)]):
-      Query[d.Props, (String, String)] = q.filter(_.key === s)
+  def restrictKey(s: String, q: Query[d.Props, (String, String),Seq]):
+      Query[d.Props, (String, String),Seq] = q.filter(_.key === s)
 }
 
 /**

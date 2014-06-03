@@ -29,20 +29,20 @@ object UseInvoker extends App {
       ts.filter(_.k <= k).sortBy(_.k)
     }
 
-    println("List of k/v pairs up to 3 with .list")
-    println("  " + upTo(3).list)
+    //println("List of k/v pairs up to 3 with .list")
+    //println("  " + upTo(3).list)
 
-    println("IndexedSeq of k/v pairs up to 3 with .to")
-    println("  " + upTo(3).buildColl[IndexedSeq])
+    //println("IndexedSeq of k/v pairs up to 3 with .buildColl")
+    //println("  " + upTo(3).buildColl[IndexedSeq])
 
-    println("Set of k/v pairs up to 3 with .to")
-    println("  " + upTo(3).buildColl[Set])
+    //println("Set of k/v pairs up to 3 with .buildColl")
+    //println("  " + upTo(3).buildColl[Set])
 
-    println("Array of k/v pairs up to 3 with .to")
-    println("  " + upTo(3).buildColl[Array])
+    //println("Array of k/v pairs up to 3 with .buildColl")
+    //println("  " + upTo(3).buildColl[Array])
 
-    println("All keys in an unboxed Array[Int]")
-    val allKeys = ts.map(_.k)
-    println("  " + allKeys.buildColl[Array]())
+    //println("All keys in an unboxed Array[Int]")
+    //val allKeys = ts.map(_.k)
+    //println("  " + allKeys.buildColl[Array]())
   }
 }
