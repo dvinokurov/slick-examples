@@ -17,13 +17,13 @@ object MongoExampleClass extends App{
     Database.forURL("mongodb://localhost:27017/test") withSession { implicit session =>
 
       // Iterate through all people and output them
-      Query[Person]("slick_dev") foreach println
+      Query[Person]("people") foreach println
 
-      Query.query[Unit,Person]("slick_dev","{id:1}") foreach{ c=>
+      Query.query[Unit,Person]("people","{id:1}") foreach{ c=>
         println(s"Filtered: $c")
       }
 
-      val personQuery = Query[Person]("slick_dev")
+      val personQuery = Query[Person]("people")
       println(personQuery.findOneTyped())
       personQuery.find().foreach{
         p=>println(p)
