@@ -69,9 +69,13 @@ object MongoExampleClass extends App{
       val queryWithParameters6 = Query.query[List[_],Person]("people","{name:?,id:?}")
       queryWithParameters6(List("Peter",2)) foreach println
 
-      println("\n Test query.list:")
+      println("\nTest query.list:")
       val q = Query[Person]("people")
       q.list foreach println
+
+      println("\nString interpolation:")
+      def findPeople(id: Int,name: String) = mq"{id:$id,name:$name}".in("people")
+      findPeople(1,"George") foreach println
 
       println("\nCleanup: remove Peter")
       Query[Person]("people").remove(MongoDBObject("name"->"Peter"))
@@ -80,13 +84,5 @@ object MongoExampleClass extends App{
       println("\nCleanup")
       Query[Person]("people").remove()
       query.find() foreach println
-
-
-      //      In progress - not sure it's possible, but it'd be nice to have such functionality:
-      //      println("\nMagic with StringContext")
-      //      def personById(id: Int) = mq("people")"{id:$id}"
-      //      or:
-      //      def personById(id: Int) = mq"$people{id:$id}"
-
     }
 }
