@@ -20,7 +20,7 @@ object MongoExampleClass extends App{
       query.insert(MongoDBObject("id" -> 1,"name" -> "George"))
       query.insert(MongoDBObject("id" -> 2,"name" -> "Peter"))
 
-      println("\nFind all with MongoCollection's find()")
+      println("\nFind all with MongoCollection's find() - results are converted from DBObjects automatically")
       query.find().foreach{
         p=>println(p)
       }
@@ -75,7 +75,12 @@ object MongoExampleClass extends App{
 //      or:
 //      def personById(id: Int) = mq"$people{id:$id}"
 
+      println("\nCleanup: remove Peter")
+      Query[Person]("people").remove(MongoDBObject("name"->"Peter"))
+      query.find() foreach println
+
       println("\nCleanup")
       Query[Person]("people").remove()
+      query.find() foreach println
     }
 }
