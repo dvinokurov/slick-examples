@@ -1,11 +1,9 @@
 package com.typesafe.slick.examples.direct
 
-import scala.slick.driver.H2Driver
-import scala.slick.driver.H2Driver.simple.{Session,Database}
-import scala.slick.direct._
 import scala.slick.direct.AnnotationMapper._
-import scala.reflect.runtime.universe
-import scala.slick.jdbc.StaticQuery.interpolation
+import scala.slick.direct._
+import scala.slick.driver.H2Driver
+import scala.slick.driver.H2Driver.simple.{Database, Session}
 
 // define classes
 @table("COFFEES") case class Coffee(
@@ -40,7 +38,7 @@ class SimpleExampleClass{ // side note: direct embedding not supported in single
 
   Database.forURL("jdbc:h2:mem:test1", driver = "org.h2.Driver") withSession { implicit session:Session =>
     // insert using SQL (currently not supported by direct embedding)
-    import slick.jdbc.StaticQuery.interpolation
+    import scala.slick.jdbc.StaticQuery.interpolation
     sqlu"create table COFFEES(COF_NAME varchar(255), PRICE DOUBLE)".execute
     (for {
       (name, sales) <- coffees_data

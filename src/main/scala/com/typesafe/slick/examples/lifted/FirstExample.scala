@@ -92,6 +92,8 @@ object FirstExample extends App {
     val l3: List[(String, String)] = q3.list
     for((s1, s2) <- l3) println("  " + s1 + " supplied by " + s2)
 
+    val q343 = coffees.withFilter(((c) => c.price.$less(9.0))).flatMap(((c) => c.supplier.map(((s) => scala.Tuple2(c.name, s.name)))))
+
     // Check the SELECT statement for that query
     println(q3.selectStatement)
 
